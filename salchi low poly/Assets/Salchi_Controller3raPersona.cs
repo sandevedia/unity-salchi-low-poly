@@ -48,7 +48,7 @@ public class Salchi_Controller3raPersona : MonoBehaviour {
          }
        
         //JUMP
-        if (Input.GetKeyDown(KeyCode.Space) && ground)
+         if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.LeftControl) && ground)
         {
             StartCoroutine(Saltar());
         }
@@ -97,19 +97,20 @@ public class Salchi_Controller3raPersona : MonoBehaviour {
 
     void OnCollisionStay(Collision col)
     {
-        if (col.gameObject.tag == "agua")
+        if (col.gameObject.tag == "suelo")
         {
-            nadando = true;
-            speed = speedInWater;
+            ground = true;
+            anim.SetBool("ground", true);
         }
     }
 
     void OnCollisionExit(Collision col)
     {
-        if (col.gameObject.tag == "agua")
+        if (col.gameObject.tag == "suelo")
         {
-            nadando = false;
-            speed = speedNormal;
+            ground = false;
+            //print("in air");
+            anim.SetBool("ground", false);
 
         }
     }
