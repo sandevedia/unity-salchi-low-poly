@@ -48,7 +48,7 @@ public class Salchi_Controller3raPersona : MonoBehaviour {
          }
        
         //JUMP
-         if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.LeftControl) && ground)
+         if (Input.GetKeyDown(KeyCode.Space)&& ground)
         {
             StartCoroutine(Saltar());
         }
