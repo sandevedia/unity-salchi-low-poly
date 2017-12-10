@@ -66,7 +66,7 @@ public class Salchi_Controller3raPersona : MonoBehaviour {
 
 
 
-    void OnTriggerEnter(Collider col)
+   /* void OnTriggerEnter(Collider col)
     {
         if (col.gameObject.tag == "puerta")
         {
@@ -74,7 +74,7 @@ public class Salchi_Controller3raPersona : MonoBehaviour {
             levelManager.GetComponent<LevelManager>().PuertaCambiarMundo();
            print("deberia cambiar");
         }
-    }
+    }*/
     void OnTriggerStay(Collider col)
     {
         if (col.gameObject.tag == "suelo")

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(UnityEngine.AI.NavMeshAgent))]
 public class tiburon : MonoBehaviour {
 
     Transform player;
@@ -16,12 +17,16 @@ public class tiburon : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-              
+
+        Perseguir();
+      
+	}
+
+    void Perseguir() {
         if (player.GetComponent<Salchi_Controller3raPersona>().nadando && player != null)
         {
             agent.SetDestination(player.position);
 
         }
-	}
-     
+    }
 }

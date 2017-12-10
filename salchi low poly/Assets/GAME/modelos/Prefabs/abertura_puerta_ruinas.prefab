@@ -25,6 +25,7 @@ GameObject:
   - component: {fileID: 65552017809441058}
   - component: {fileID: 65783774112572250}
   - component: {fileID: 65022336501896790}
+  - component: {fileID: 114356056558859300}
   m_Layer: 0
   m_Name: abertura_puerta_ruinas
   m_TagString: puerta
@@ -32,6 +33,34 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1840634413208074
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4128202056078650}
+  m_Layer: 0
+  m_Name: positionSpawn
+  m_TagString: Untagged
+  m_Icon: {fileID: -1412012063857583412, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4128202056078650
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1840634413208074}
+  m_LocalRotation: {x: -0, y: -0.70710576, z: -0, w: 0.70710784}
+  m_LocalPosition: {x: 159.7, y: 11.30581, z: -4.3}
+  m_LocalScale: {x: 33.333336, y: 33.333336, z: 33.333336}
+  m_Children: []
+  m_Father: {fileID: 4894117167227220}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4894117167227220
 Transform:
   m_ObjectHideFlags: 1
@@ -39,9 +68,10 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1693270464359734}
   m_LocalRotation: {x: -0, y: 0.70710576, z: -0, w: 0.70710784}
-  m_LocalPosition: {x: 4.4, y: 11.060825, z: -23.69}
+  m_LocalPosition: {x: 11.221504, y: 12.12682, z: -10.941957}
   m_LocalScale: {x: 0.03, y: 0.03, z: 0.03}
-  m_Children: []
+  m_Children:
+  - {fileID: 4128202056078650}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -131,3 +161,15 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 10.999999, y: 24.361744, z: 99.99998}
   m_Center: {x: -4.4999933, y: 87.819115, z: 0.000013032222}
+--- !u!114 &114356056558859300
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1693270464359734}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 630bd534891834647b182f57f2db57de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Destino: {fileID: 4128202056078650}
