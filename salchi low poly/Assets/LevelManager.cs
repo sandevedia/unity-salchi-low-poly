@@ -22,7 +22,7 @@ public class LevelManager : MonoBehaviour {
         CambiarMundo();
 	}
 
-    void CambiarMundo()
+    public void CambiarMundo()
     {
         if (Input.GetKeyDown(KeyCode.LeftControl))
         {
@@ -39,5 +39,22 @@ public class LevelManager : MonoBehaviour {
                 camera.backgroundColor = pltierraColor;
             }
         }
+    }
+    public void PuertaCambiarMundo()
+    {
+       
+            if (planetaTierra.activeInHierarchy)
+            {
+                planetaTierra.SetActive(false);
+                infierno.SetActive(true);
+                camera.backgroundColor = infColor;
+            }
+            else
+            {
+                planetaTierra.SetActive(true);
+                infierno.SetActive(false);
+                camera.backgroundColor = pltierraColor;
+            }
+        
     }
 }

@@ -14,10 +14,12 @@ public class Salchi_Controller3raPersona : MonoBehaviour {
     float inputZ;
     float inputY;
     public bool nadando = false;
+    GameObject levelManager;
     void Start()
     {
         anim = GetComponent<Animator>();
         speedNormal = speed;
+        levelManager = GameObject.Find("LevelManager");
     }
     void Update()
     {
@@ -60,6 +62,18 @@ public class Salchi_Controller3raPersona : MonoBehaviour {
 
         yield return new WaitForSeconds(2f);
 
+    }
+
+
+
+    void OnTriggerEnter(Collider col)
+    {
+        if (col.gameObject.tag == "puerta")
+        {
+
+            levelManager.GetComponent<LevelManager>().PuertaCambiarMundo();
+           print("deberia cambiar");
+        }
     }
     void OnTriggerStay(Collider col)
     {
