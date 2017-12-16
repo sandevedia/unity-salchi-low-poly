@@ -15,17 +15,24 @@ public class Salchi_Controller3raPersona : MonoBehaviour {
     float inputY;
     public bool nadando = false;
     GameObject levelManager;
+    Rigidbody rib;
     void Start()
     {
+       // Physics.gravity = new Vector3(0, -98.1F, 0);
         anim = GetComponent<Animator>();
         speedNormal = speed;
         levelManager = GameObject.Find("LevelManager");
+        rib = GetComponent<Rigidbody>();
     }
     void Update()
     {
-       
-        Move2();
+        
 
+        Move2();
+        if (!ground)
+        {
+            rib.AddForce(Vector3.down * 10 * -Physics.gravity.y);
+        }
     }
 
     void Move2()
@@ -33,26 +40,45 @@ public class Salchi_Controller3raPersona : MonoBehaviour {
         inputY = Input.GetAxisRaw("Vertical");
         inputZ = -Input.GetAxisRaw("Horizontal");
 
-
-         transform.Translate(new Vector3(-Input.GetAxisRaw("Vertical"), 0 , Input.GetAxisRaw("Horizontal")) * Time.deltaTime * speed, Space.World);
-        //transform.Translate(new Vector3(0, 0, Input.GetAxisRaw("Horizontal")) * Time.deltaTime * speed, Space.World);
-
-         if (Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0)
+        if (ground)
         {
-            transform.LookAt(new Vector3(inputY*100000, 0, inputZ * 100000));
-            anim.SetBool("run", true);
-            // transform.Translate(new Vector3(inputY, 0 , -inputZ) * Time.deltaTime * speed);
-        }
-         else
-         {
-             anim.SetBool("run", false);
+            transform.Translate(new Vector3(-Input.GetAxisRaw("Vertical"), 0, Input.GetAxisRaw("Horizontal")) * Time.deltaTime * speed, Space.World);
+            //transform.Translate(new Vector3(0, 0, Input.GetAxisRaw("Horizontal")) * Time.deltaTime * speed, Space.World);
 
-         }
+            if (Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0)
+            {
+                transform.LookAt(new Vector3(inputY * 100000, 0, inputZ * 100000));
+                anim.SetBool("run", true);
+                // transform.Translate(new Vector3(inputY, 0 , -inputZ) * Time.deltaTime * speed);
+            }
+            else
+            {
+                anim.SetBool("run", false);
+
+            }
+
+        }
+        else {
+            transform.Translate(new Vector3(-Input.GetAxisRaw("Vertical"), 0, Input.GetAxisRaw("Horizontal")) * Time.deltaTime * speed/2, Space.World);
+            //transform.Translate(new Vector3(0, 0, Input.GetAxisRaw("Horizontal")) * Time.deltaTime * speed, Space.World);
+
+            if (Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0)
+            {
+                transform.LookAt(new Vector3(inputY * 100000, 0, inputZ * 100000));
+                anim.SetBool("run", true);
+                // transform.Translate(new Vector3(inputY, 0 , -inputZ) * Time.deltaTime * speed);
+            }
+        
+        
+
+        }
+        
        
         //JUMP
          if (Input.GetKeyDown(KeyCode.Space)&& ground)
         {
             StartCoroutine(Saltar());
+            
         }
     }
 

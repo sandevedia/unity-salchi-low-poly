@@ -28,13 +28,13 @@ public class BichoInfierno : MonoBehaviour
    
    public void Perseguir(bool Setwalk)
     {
-        if (player.GetComponent<Salchi_Controller3raPersona>().nadando && player != null)
-        {
+       // if (player.GetComponent<Salchi_Controller3raPersona>().nadando && player != null)
+        //{
             agent.SetDestination(player.position);
             anim.SetBool("walk", Setwalk);
             agent.speed = speed;
 
-        }
+       // }
     }
 
 
@@ -55,6 +55,8 @@ public class BichoInfierno : MonoBehaviour
         if (col.gameObject.tag == "Player")
         {
             Perseguir(true);
+            print("deberia andar");
+            agent.Resume();
         }
     }
 
@@ -63,6 +65,7 @@ public class BichoInfierno : MonoBehaviour
         if (col.gameObject.tag == "Player")
         {
             Perseguir(false);
+            agent.Stop();
         }
     }
 }
