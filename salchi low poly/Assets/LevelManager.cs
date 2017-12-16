@@ -9,6 +9,10 @@ public class LevelManager : MonoBehaviour {
   public Camera camera;
   public Color infColor;
   public Color pltierraColor;
+  public bool Automatic = false;
+  public float temporizador = 2.0f;
+  private float time = 0.0f;
+
 
 	void Start () {
 
@@ -20,8 +24,24 @@ public class LevelManager : MonoBehaviour {
 	
 	void Update () {
         CambiarMundo();
+        if (Automatic)
+        {
+            CambiarAutomaticamente();
+        }
+        
 	}
 
+
+    void CambiarAutomaticamente()
+    {
+        time += Time.deltaTime;
+        if (time >= temporizador)
+        {
+            time = 0.0f;
+            PuertaCambiarMundo();
+            return;
+        }
+    }
     public void CambiarMundo()
     {
         if (Input.GetKeyDown(KeyCode.LeftControl))

@@ -55,7 +55,7 @@ public class BichoInfierno : MonoBehaviour
         if (col.gameObject.tag == "Player")
         {
             Perseguir(true);
-            print("deberia andar");
+            //print("deberia andar");
             agent.Resume();
         }
     }

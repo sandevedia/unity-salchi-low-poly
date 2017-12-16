@@ -11,14 +11,14 @@ public class Salchi_Controller3raPersona : MonoBehaviour {
     public float jump = 5.0f;
     bool ground = false;
     Animator anim;
-    float inputZ;
-    float inputY;
+
     public bool nadando = false;
     GameObject levelManager;
     Rigidbody rib;
+    
     void Start()
     {
-       // Physics.gravity = new Vector3(0, -98.1F, 0);
+     
         anim = GetComponent<Animator>();
         speedNormal = speed;
         levelManager = GameObject.Find("LevelManager");
@@ -26,72 +26,61 @@ public class Salchi_Controller3raPersona : MonoBehaviour {
     }
     void Update()
     {
-        
-
-        Move2();
-        if (!ground)
-        {
-            rib.AddForce(Vector3.down * 10 * -Physics.gravity.y);
-        }
+            Move2();
+            Jump();
     }
 
     void Move2()
     {
-        inputY = Input.GetAxisRaw("Vertical");
-        inputZ = -Input.GetAxisRaw("Horizontal");
 
         if (ground)
         {
             transform.Translate(new Vector3(-Input.GetAxisRaw("Vertical"), 0, Input.GetAxisRaw("Horizontal")) * Time.deltaTime * speed, Space.World);
-            //transform.Translate(new Vector3(0, 0, Input.GetAxisRaw("Horizontal")) * Time.deltaTime * speed, Space.World);
 
             if (Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0)
             {
-                transform.LookAt(new Vector3(inputY * 100000, 0, inputZ * 100000));
+                transform.LookAt(new Vector3(Input.GetAxisRaw("Vertical") * 100000, 0, -Input.GetAxisRaw("Horizontal") * 100000));
                 anim.SetBool("run", true);
-                // transform.Translate(new Vector3(inputY, 0 , -inputZ) * Time.deltaTime * speed);
+                
             }
             else
             {
                 anim.SetBool("run", false);
-
+                
             }
 
         }
         else {
-            transform.Translate(new Vector3(-Input.GetAxisRaw("Vertical"), 0, Input.GetAxisRaw("Horizontal")) * Time.deltaTime * speed/2, Space.World);
-            //transform.Translate(new Vector3(0, 0, Input.GetAxisRaw("Horizontal")) * Time.deltaTime * speed, Space.World);
+            transform.Translate(new Vector3(-Input.GetAxisRaw("Vertical"), 0, Input.GetAxisRaw("Horizontal")) * Time.deltaTime * speed/3, Space.World);
+
+            rib.AddForce(Vector3.down * 10 * -Physics.gravity.y);
 
             if (Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0)
             {
-                transform.LookAt(new Vector3(inputY * 100000, 0, inputZ * 100000));
-                anim.SetBool("run", true);
-                // transform.Translate(new Vector3(inputY, 0 , -inputZ) * Time.deltaTime * speed);
+                transform.LookAt(new Vector3(Input.GetAxisRaw("Vertical") * 100000, 0, -Input.GetAxisRaw("Horizontal") * 100000));
+                anim.SetBool("run", false);
+               
             }
-        
-        
-
         }
-        
-       
+               
+    }
+
+    void Jump()
+    {
         //JUMP
-         if (Input.GetKeyDown(KeyCode.Space)&& ground)
+        if (Input.GetKeyDown(KeyCode.Space) && ground)
         {
             StartCoroutine(Saltar());
-            
         }
     }
 
     IEnumerator Saltar()
     {
         GetComponent<Rigidbody>().AddForceAtPosition(new Vector3(0, 1 * jump, 0), transform.position, ForceMode.Impulse);
-
         yield return new WaitForSeconds(2f);
 
     }
-
-
-
+    
    /* void OnTriggerEnter(Collider col)
     {
         if (col.gameObject.tag == "puerta")
@@ -112,7 +101,14 @@ public class Salchi_Controller3raPersona : MonoBehaviour {
         {
             nadando = true;
             speed = speedInWater;
-            print("nadando");
+            //print("nadando");
+        }
+        else
+        {
+            ground = false;
+            //print("in air");
+            anim.SetBool("ground", false);
+            speed = speedNormal;
         }
 
     }
@@ -151,7 +147,6 @@ public class Salchi_Controller3raPersona : MonoBehaviour {
             ground = false;
             //print("in air");
             anim.SetBool("ground", false);
-
         }
     }
 
